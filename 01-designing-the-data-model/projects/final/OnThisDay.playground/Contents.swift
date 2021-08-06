@@ -37,7 +37,9 @@ let monthNum = 2
 let dayNum = 29
 
 func testData() {
-  if let day = appState.getDataFor(month: monthNum, day: dayNum) {
+  if let day = appState.getDataFor(
+    month: monthNum, day: dayNum
+  ) {
     print(day.displayDate)
     print("\(day.deaths.count) deaths")
   } else {
@@ -110,7 +112,9 @@ func getDataForDay(month: Int, day: Int) async throws -> Day {
 
 Task {
   do {
-    let day = try await getDataForDay(month: monthNum, day: dayNum)
+    let day = try await getDataForDay(
+      month: monthNum, day: dayNum
+    )
     appState.days[day.displayDate] = day
     testData()
   } catch {
@@ -135,7 +139,7 @@ struct Event: Decodable, Identifiable {
   let id = UUID()
   let text: String
   let year: String
-  let links:  [EventLink]
+  let links: [EventLink]
 
   enum CodingKeys: String, CodingKey {
     case text
@@ -155,7 +159,9 @@ struct Event: Decodable, Identifiable {
       text = textParts[0].decoded
     }
 
-    let allLinks = try values.decode([String: [String: String]].self, forKey: .links)
+    let allLinks = try values.decode(
+      [String: [String: String]].self,
+      forKey: .links)
     var processedLinks: [EventLink] = []
     for (_, link) in allLinks {
       if let title = link["2"], let address = link["1"], let url = URL(string: address) {
@@ -187,4 +193,3 @@ class AppState: ObservableObject {
     return days[dateString]
   }
 }
-

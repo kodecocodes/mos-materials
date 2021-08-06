@@ -6,9 +6,9 @@ public func sampleFileUrl() -> URL? {
   do {
     let downloadsFolder = try fileManager.url(
       for: .downloadsDirectory,
-         in: .userDomainMask,
-         appropriateFor: nil,
-         create: true)
+      in: .userDomainMask,
+      appropriateFor: nil,
+      create: true)
     let jsonFile = downloadsFolder.appendingPathComponent("SampleData.json")
     return jsonFile
   } catch {
