@@ -48,22 +48,24 @@ extension String {
 }
 
 enum FetchError: Error {
-  case badUrl
+  case badURL
   case badResponse
-  case badJson
+  case badJSON
 }
 
 func getDataForDay(month: Int, day: Int) async throws {
   let address = "https://apizen.date/api/\(month)/\(day)"
   guard let url = URL(string: address) else {
-    throw FetchError.badUrl
+    throw FetchError.badURL
   }
   let request = URLRequest(url: url)
 
   let (data, response) = try await URLSession.shared.data(for: request)
-  guard let response = response as? HTTPURLResponse, response.statusCode < 400 else {
-    throw FetchError.badResponse
-  }
+  guard
+    let response = response as? HTTPURLResponse,
+    response.statusCode < 400 else {
+      throw FetchError.badResponse
+    }
 
   if let jsonString = String(data: data, encoding: .utf8) {
     saveSampleData(json: jsonString)

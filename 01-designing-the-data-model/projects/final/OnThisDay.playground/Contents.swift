@@ -63,22 +63,24 @@ extension String {
 }
 
 enum FetchError: Error {
-  case badUrl
+  case badURL
   case badResponse
-  case badJson
+  case badJSON
 }
 
 func getDataForDay(month: Int, day: Int) async throws -> Day {
   let address = "https://apizen.date/api/\(month)/\(day)"
   guard let url = URL(string: address) else {
-    throw FetchError.badUrl
+    throw FetchError.badURL
   }
   let request = URLRequest(url: url)
 
   let (data, response) = try await URLSession.shared.data(for: request)
-  guard let response = response as? HTTPURLResponse, response.statusCode < 400 else {
-    throw FetchError.badResponse
-  }
+  guard
+    let response = response as? HTTPURLResponse,
+    response.statusCode < 400 else {
+      throw FetchError.badResponse
+    }
 
   if let jsonString = String(data: data, encoding: .utf8) {
     saveSampleData(json: jsonString)
@@ -88,7 +90,7 @@ func getDataForDay(month: Int, day: Int) async throws -> Day {
     let day = try JSONDecoder().decode(Day.self, from: data)
     return day
   } catch {
-    throw FetchError.badJson
+    throw FetchError.badJSON
   }
 }
 
@@ -151,20 +153,23 @@ struct Event: Decodable, Identifiable {
 
     let rawText = try values.decode(String.self, forKey: .text)
     let textParts = rawText.components(separatedBy: " &#8211; ")
-    if textParts.count > 1 {
+    if textParts.count == 2 {
       year = textParts[0]
       text = textParts[1].decoded
     } else {
       year = "?"
-      text = textParts[0].decoded
+      text = rawText.decoded
     }
 
     let allLinks = try values.decode(
       [String: [String: String]].self,
       forKey: .links)
+
     var processedLinks: [EventLink] = []
     for (_, link) in allLinks {
-      if let title = link["2"], let address = link["1"], let url = URL(string: address) {
+      if let title = link["2"],
+         let address = link["1"],
+         let url = URL(string: address) {
         processedLinks.append(EventLink(id: UUID(), title: title, url: url))
       }
     }
