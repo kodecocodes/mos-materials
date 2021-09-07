@@ -45,6 +45,8 @@ struct GridView: View {
         ForEach(gridData) {
           EventView(event: $0)
             .frame(height: 350, alignment: .topLeading)
+            .background()
+            .clipped()
             .border(.secondary, width: 1)
             .padding(.bottom, 5)
             .shadow(color: .primary.opacity(0.3), radius: 3, x: 3, y: 3)

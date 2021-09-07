@@ -66,8 +66,6 @@ struct EventView: View {
     }
     .padding()
     .frame(width: 250)
-    .background()
-    .clipped()
   }
 }
 
