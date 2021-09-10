@@ -34,21 +34,21 @@ import SwiftUI
 
 struct EventView: View {
   var event: Event
-  
+
   var body: some View {
     HStack {
       VStack(alignment: .leading, spacing: 30) {
         Text("\(Image(systemName: "calendar")) \(event.year)")
           .font(.title)
           .foregroundColor(.green)
-        
+
         Text("\(Image(systemName: "info.circle")) \(event.text)")
           .font(.title3)
-        
+
         VStack(alignment: .leading, spacing: 10) {
           Text("\(Image(systemName: "link")) Related Links:")
             .font(.title2)
-          
+
           ForEach(event.links) { link in
             Link(link.title, destination: link.url)
               .onHover { inside in
@@ -60,7 +60,7 @@ struct EventView: View {
               }
           }
         }
-        
+
         Spacer()
       }
       Spacer()
