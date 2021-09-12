@@ -73,8 +73,3 @@ struct ContentView_Previews: PreviewProvider {
     ContentView()
   }
 }
-
-enum ViewMode: String, CaseIterable {
-  case grid = "Grid"
-  case table = "Table"
-}
