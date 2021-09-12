@@ -60,7 +60,6 @@ struct EventView: View {
               }
           }
         }
-
         Spacer()
       }
       Spacer()
