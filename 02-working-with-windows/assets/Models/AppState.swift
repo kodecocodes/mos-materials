@@ -75,6 +75,7 @@ class AppState: ObservableObject {
         let searchTextLower = searchText.lowercased()
         let filteredEntries = events.filter { event in
           event.text.lowercased().contains(searchTextLower)
+          || event.year.lowercased().contains(searchTextLower)
         }
         return filteredEntries
       }
