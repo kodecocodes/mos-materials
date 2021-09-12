@@ -30,7 +30,7 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import SwiftUI
+import Foundation
 
 /// AppState is the primary data model for this app.
 ///
@@ -75,6 +75,7 @@ class AppState: ObservableObject {
         let searchTextLower = searchText.lowercased()
         let filteredEntries = events.filter { event in
           event.text.lowercased().contains(searchTextLower)
+          || event.year.lowercased().contains(searchTextLower)
         }
         return filteredEntries
       }
