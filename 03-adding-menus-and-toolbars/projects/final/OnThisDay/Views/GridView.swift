@@ -34,7 +34,6 @@ import SwiftUI
 
 struct GridView: View {
   var gridData: [Event]
-  @AppStorage("showTotals") var showTotals = true
 
   var columns: [GridItem] {
     [GridItem(.adaptive(minimum: 250, maximum: 250), spacing: 20)]
