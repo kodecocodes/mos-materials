@@ -62,7 +62,6 @@ struct Menus: Commands {
             .tag($0)
         }
       }
-
       // Optional examples
       //
       //  Divider()
@@ -83,7 +82,6 @@ struct Menus: Commands {
       //    }
       //    .keyboardShortcut("U", modifiers: .command)
       //  }
-
     }
   }
 

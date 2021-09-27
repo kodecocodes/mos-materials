@@ -46,16 +46,20 @@ enum Networker {
     }
     let request = URLRequest(url: url)
 
-    let (data, response) = try await URLSession.shared.data(for: request)
-    guard let response = response as? HTTPURLResponse, response.statusCode < 400 else {
+    let (data, response) = try await URLSession.shared.data(
+      for: request)
+    guard let response = response as? HTTPURLResponse, response.statusCode < 400
+    else {
       throw FetchError.badResponse
     }
 
-    guard let day = try? JSONDecoder().decode(Day.self, from: data) else {
+    guard let day = try? JSONDecoder().decode(
+      Day.self,
+      from: data)
+    else {
       if let debugString = String(data: data, encoding: .utf8) {
         print(debugString)
       }
-
       throw FetchError.badJSON
     }
     return day
