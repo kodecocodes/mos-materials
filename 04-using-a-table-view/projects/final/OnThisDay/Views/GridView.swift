@@ -38,7 +38,11 @@ struct GridView: View {
   @AppStorage("showTotals") var showTotals = true
 
   var columns: [GridItem] {
-    [GridItem(.adaptive(minimum: 250, maximum: 250), spacing: 20)]
+    [
+      GridItem(
+        .adaptive(minimum: 250, maximum: 250),
+        spacing: 20)
+    ]
   }
 
   var body: some View {
@@ -52,7 +56,9 @@ struct GridView: View {
               .clipped()
               .border(.secondary, width: 1)
               .padding(.bottom, 5)
-              .shadow(color: .primary.opacity(0.3), radius: 3, x: 3, y: 3)
+              .shadow(
+                color: .primary.opacity(0.3), radius: 3, x: 3, y: 3
+              )
           }
         }
       }

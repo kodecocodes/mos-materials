@@ -83,7 +83,6 @@ struct Menus: Commands {
       //    }
       //    .keyboardShortcut("U", modifiers: .command)
       //  }
-
     }
   }
 
