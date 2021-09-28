@@ -62,27 +62,6 @@ struct Menus: Commands {
             .tag($0)
         }
       }
-
-      // Optional examples
-      //
-      //  Divider()
-      //
-      //  Menu("Appearance") {
-      //    Button("Light") {
-      //      displayMode = .light
-      //    }
-      //    .keyboardShortcut("L", modifiers: .command)
-      //
-      //    Button("Dark") {
-      //      displayMode = .dark
-      //    }
-      //    .keyboardShortcut("D", modifiers: .command)
-      //
-      //    Button("Auto") {
-      //      displayMode = .auto
-      //    }
-      //    .keyboardShortcut("U", modifiers: .command)
-      //  }
     }
   }
 
