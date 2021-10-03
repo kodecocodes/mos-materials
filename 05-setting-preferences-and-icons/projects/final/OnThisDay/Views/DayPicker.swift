@@ -37,16 +37,16 @@ struct DayPicker: View {
 
   @SceneStorage("selectedDate") var selectedDate: String?
 
-  @State private var month = Calendar.current.monthSymbols[0]
+  @State private var month = "January"
   @State private var day = 1
 
   var body: some View {
     VStack {
-      Text("Select a Different Date")
+      Text("Select a Date")
 
       HStack {
         Picker("", selection: $month) {
-          ForEach(Calendar.current.monthSymbols, id: \.self) {
+          ForEach(appState.englishMonthNames, id: \.self) {
             Text($0)
           }
         }
@@ -71,42 +71,28 @@ struct DayPicker: View {
             await getNewEvents()
           }
         }
-        .tint(.accentColor)
         .buttonStyle(.borderedProminent)
         .controlSize(.large)
       }
     }
-    .padding(.vertical)
+    .padding()
   }
 
   var maxDays: Int {
-    guard let monthIndex = Calendar.current.monthSymbols.firstIndex(of: month) else {
+    switch month {
+    case "February":
+      return 29
+    case "April", "June", "September", "November":
+      return 30
+    default:
       return 31
     }
-
-    let daysInMonth: Int
-    switch monthIndex + 1 {
-    case 2:
-      daysInMonth = 29
-    case 9, 4, 6, 11:
-      daysInMonth = 30
-    default:
-      daysInMonth = 31
-    }
-
-    if day > daysInMonth {
-      DispatchQueue.main.async {
-        day = 1
-      }
-    }
-
-    return daysInMonth
   }
 
   func getNewEvents() async {
-    let monthIndex = Calendar.current.monthSymbols.firstIndex(of: month) ?? 0
+    let monthIndex = appState.englishMonthNames
+      .firstIndex(of: month) ?? 0
     let monthNumber = monthIndex + 1
-
     await appState.getDataFor(month: monthNumber, day: day)
     selectedDate = "\(month) \(day)"
   }
@@ -116,6 +102,6 @@ struct DayPicker_Previews: PreviewProvider {
   static var previews: some View {
     DayPicker()
       .environmentObject(AppState())
-      .frame(maxWidth: 200)
+      .frame(width: 200)
   }
 }

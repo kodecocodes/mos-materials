@@ -32,96 +32,76 @@
 
 import SwiftUI
 
-enum ViewType: Int {
-  case grid
-  case table
-}
-
-struct MainView: View {
+struct DayPicker: View {
   @EnvironmentObject var appState: AppState
 
-  @AppStorage("showBirths") var showBirths = true
-  @AppStorage("showDeaths") var showDeaths = true
-
   @SceneStorage("selectedDate") var selectedDate: String?
-  @SceneStorage("viewType") var viewType = ViewType.grid
-  @SceneStorage("eventType") var eventType: EventType?
+
+  @State private var month = "January"
+  @State private var day = 1
 
   var body: some View {
-    Group {
-      if appState.days.isEmpty {
-        LoadingView(loadingError: appState.loadingError)
-      } else if viewType == .table {
-        TableView()
-      } else {
-        GridView()
+    VStack {
+      Text("Select a Date")
+
+      HStack {
+        Picker("", selection: $month) {
+          ForEach(appState.englishMonthNames, id: \.self) {
+            Text($0)
+          }
+        }
+        .pickerStyle(.menu)
+
+        Picker("", selection: $day) {
+          ForEach(1 ..< maxDays + 1, id: \.self) {
+            Text("\($0)")
+          }
+        }
+        .pickerStyle(.menu)
+        .frame(maxWidth: 60)
+        .padding(.trailing, 10)
       }
-    }
-    .toolbar { Toolbar(viewType: $viewType) }
-    .navigationTitle(Text(navTitle))
-    .onAppear {
-      if selectedDate == nil {
-        selectedDate = today()
-        eventType = .events
-        viewType = .grid
-      }
-    }
-    .onChange(of: showBirths) { _ in
-      if eventType == .births {
-        eventType = .events
-        appState.toggleEventsFor(date: selectedDate)
-      }
-    }
-    .onChange(of: showDeaths) { _ in
-      if eventType == .deaths {
-        eventType = .events
-        appState.toggleEventsFor(date: selectedDate)
-      }
-    }
-  }
 
-  var navTitle: String {
-    if let date = selectedDate, let type = eventType {
-      return "\(date) - \(type.rawValue)"
-    }
-    return "On This Day"
-  }
-
-  func today() -> String? {
-    let calendarDate = Calendar.current.dateComponents([.day, .month], from: Date())
-
-    if let dayNum = calendarDate.day, let monthNum = calendarDate.month {
-      let month = Calendar.current.monthSymbols[monthNum - 1]
-      return "\(month) \(dayNum)"
-    }
-    return nil
-  }
-}
-
-struct MainView_Previews: PreviewProvider {
-  static var previews: some View {
-    let appState = AppState(isPreview: true)
-    appState.readSampleData()
-
-    return MainView()
-      .environmentObject(appState)
-      .frame(maxWidth: .infinity)
-  }
-}
-
-struct LoadingView: View {
-  var loadingError: Bool
-
-  var body: some View {
-    if loadingError {
-      Text("There was a problem loading the events, probably due to too many requests. Please try again in a minute.")
-    } else {
-      VStack {
+      if appState.isLoading {
         ProgressView()
-          .padding()
-        Text("Loading today's events…")
-          .font(.title3)
+          .frame(height: 28)
+      } else {
+        Button("Get Events") {
+          Task {
+            await getNewEvents()
+          }
+        }
+        .buttonStyle(.borderedProminent)
+        .controlSize(.large)
       }
     }
+    .padding()
+  }
+
+  var maxDays: Int {
+    switch month {
+    case "February":
+      return 29
+    case "April", "June", "September", "November":
+      return 30
+    default:
+      return 31
+    }
+  }
+
+  func getNewEvents() async {
+    let monthIndex = appState.englishMonthNames
+      .firstIndex(of: month) ?? 0
+    let monthNumber = monthIndex + 1
+    await appState.getDataFor(month: monthNumber, day: day)
+    selectedDate = "\(month) \(day)"
+  }
+}
+
+struct DayPicker_Previews: PreviewProvider {
+  static var previews: some View {
+    DayPicker()
+      .environmentObject(AppState())
+      .frame(width: 200)
   }
 }
