@@ -53,16 +53,3 @@ struct SidebarView: View {
     .listStyle(.sidebar)
   }
 }
-
-struct SidebarView_Previews: PreviewProvider {
-  static var previews: some View {
-    Group {
-      SidebarView(selection: .constant(nil))
-        .preferredColorScheme(.light)
-        .frame(width: 200)
-      SidebarView(selection: .constant(nil))
-        .preferredColorScheme(.dark)
-        .frame(width: 200)
-    }
-  }
-}
