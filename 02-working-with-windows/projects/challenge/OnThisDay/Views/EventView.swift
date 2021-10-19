@@ -73,8 +73,10 @@ struct EventView_Previews: PreviewProvider {
   static var previews: some View {
     Group {
       EventView(event: Event.sampleEvent)
+        .background()
         .preferredColorScheme(.light)
       EventView(event: Event.sampleEvent)
+        .background()
         .preferredColorScheme(.dark)
     }
   }
