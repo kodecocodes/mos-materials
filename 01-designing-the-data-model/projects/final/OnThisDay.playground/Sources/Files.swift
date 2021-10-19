@@ -40,7 +40,8 @@ public func sampleFileURL() -> URL? {
       for: .downloadsDirectory,
          in: .userDomainMask,
          appropriateFor: nil,
-         create: true)
+         create: true
+    )
 
     let jsonFile = downloadsFolder
       .appendingPathComponent("SampleData.json")

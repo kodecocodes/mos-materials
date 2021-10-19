@@ -170,7 +170,9 @@ struct Event: Decodable, Identifiable {
       if let title = link["2"],
          let address = link["1"],
          let url = URL(string: address) {
-        processedLinks.append(EventLink(id: UUID(), title: title, url: url))
+        processedLinks.append(
+          EventLink(id: UUID(), title: title, url: url)
+        )
       }
     }
     links = processedLinks
