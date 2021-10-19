@@ -55,8 +55,7 @@ struct GridView: View {
               .border(.secondary, width: 1)
               .padding(.bottom, 5)
               .shadow(
-                color: .primary.opacity(0.3),
-                radius: 3, x: 3, y: 3)
+                color: .primary.opacity(0.3), radius: 3, x: 3, y: 3)
           }
         }
       }
