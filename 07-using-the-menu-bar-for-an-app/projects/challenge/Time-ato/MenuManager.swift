@@ -66,6 +66,8 @@ class MenuManager: NSObject, NSMenuDelegate {
 
   func showTasksInMenu() {
     var index = itemsBeforeTasks
+    var taskCounter = 0
+
     let itemFrame = NSRect(x: 0, y: 0, width: 270, height: 40)
 
     for task in tasks {
@@ -76,8 +78,9 @@ class MenuManager: NSObject, NSMenuDelegate {
 
       statusMenu.insertItem(item, at: index)
       index += 1
+      taskCounter += 1
 
-      if task.id.isMultiple(of: 4) {
+      if taskCounter.isMultiple(of: 4) {
         statusMenu.insertItem(NSMenuItem.separator(), at: index)
         index += 1
       }

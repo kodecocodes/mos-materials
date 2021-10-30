@@ -33,7 +33,7 @@
 import AppKit
 
 struct Task: Identifiable, Codable {
-  var id: Int
+  let id: UUID
   var title: String
   var status: TaskStatus = .notStarted
   var startTime: Date?
@@ -71,39 +71,39 @@ struct Task: Identifiable, Codable {
 
 extension Task {
   static var sampleTasks: [Task] = [
-    Task(id: 1, title: "Communications"),
-    Task(id: 2, title: "Status Meeting"),
-    Task(id: 3, title: "Project ABC - Ticket 42a"),
-    Task(id: 4, title: "Project ABC - Ticket 42b"),
-    Task(id: 5, title: "Project ABC - Ticket 42c"),
-    Task(id: 6, title: "Testing"),
-    Task(id: 7, title: "Documentation"),
-    Task(id: 8, title: "Project ABC - Ticket 123")
+    Task(id: UUID(), title: "Communications"),
+    Task(id: UUID(), title: "Status Meeting"),
+    Task(id: UUID(), title: "Project ABC - Ticket 42a"),
+    Task(id: UUID(), title: "Project ABC - Ticket 42b"),
+    Task(id: UUID(), title: "Project ABC - Ticket 42c"),
+    Task(id: UUID(), title: "Testing"),
+    Task(id: UUID(), title: "Documentation"),
+    Task(id: UUID(), title: "Project ABC - Ticket 123")
   ]
 
   static var sampleTasksWithStatus: [Task] = [
     Task(
-      id: 1,
+      id: UUID(),
       title: "Communications",
       status: .complete,
       startTime: Date(timeIntervalSinceNow: -600)
     ),
     Task(
-      id: 2,
+      id: UUID(),
       title: "Status Meeting",
       status: .complete,
       startTime: Date(timeIntervalSinceNow: -300)
     ),
     Task(
-      id: 3,
+      id: UUID(),
       title: "Project ABC - Ticket 42a",
       status: .inProgress,
       startTime: Date(timeIntervalSinceNow: -60)
     ),
-    Task(id: 4, title: "Project ABC - Ticket 42b"),
-    Task(id: 5, title: "Project ABC - Ticket 42c"),
-    Task(id: 6, title: "Testing"),
-    Task(id: 7, title: "Documentation"),
-    Task(id: 8, title: "Project ABC - Ticket 123")
+    Task(id: UUID(), title: "Project ABC - Ticket 42b"),
+    Task(id: UUID(), title: "Project ABC - Ticket 42c"),
+    Task(id: UUID(), title: "Testing"),
+    Task(id: UUID(), title: "Documentation"),
+    Task(id: UUID(), title: "Project ABC - Ticket 123")
   ]
 }
