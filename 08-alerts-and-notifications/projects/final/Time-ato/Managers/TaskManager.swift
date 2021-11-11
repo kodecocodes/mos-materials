@@ -96,8 +96,8 @@ class TaskManager {
     case .runningTask(let taskIndex):
       checkForTaskFinish(activeTaskIndex: taskIndex)
     case
-        .takingShortBreak(let startTime),
-        .takingLongBreak(let startTime):
+      .takingShortBreak(let startTime),
+      .takingLongBreak(let startTime):
       if let breakDuration = timerState.breakDuration {
         checkForBreakFinish(
           startTime: startTime,

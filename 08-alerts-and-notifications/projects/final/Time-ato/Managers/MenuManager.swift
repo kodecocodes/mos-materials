@@ -33,10 +33,10 @@
 import AppKit
 
 class MenuManager: NSObject, NSMenuDelegate {
-  var statusMenu: NSMenu
+  let statusMenu: NSMenu
   var menuIsOpen = false
 
-  var taskManager = TaskManager()
+  let taskManager = TaskManager()
 
   let itemsBeforeTasks = 2
   let itemsAfterTasks = 6
