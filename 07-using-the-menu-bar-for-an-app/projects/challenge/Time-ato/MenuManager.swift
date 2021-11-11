@@ -33,7 +33,7 @@
 import AppKit
 
 class MenuManager: NSObject, NSMenuDelegate {
-  var statusMenu: NSMenu
+  let statusMenu: NSMenu
   var menuIsOpen = false
 
   var tasks = Task.sampleTasksWithStatus
