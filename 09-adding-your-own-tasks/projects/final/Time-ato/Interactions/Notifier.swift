@@ -74,7 +74,11 @@ class Notifier: NSObject {
     )
   }
 
-  func sendNotification(title: String, message: String, category: String? = nil) {
+  func sendNotification(
+    title: String,
+    message: String,
+    category: String? = nil
+  ) {
     checkNotificationPermissions()
 
     let content = UNMutableNotificationContent()
