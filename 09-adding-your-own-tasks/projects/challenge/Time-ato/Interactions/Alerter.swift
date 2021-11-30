@@ -67,8 +67,11 @@ struct Alerter {
   }
 
   @discardableResult
-  func openAlert(title: String, message: String, buttonTitles: [String] = [])
-  -> NSApplication.ModalResponse {
+  func openAlert(
+    title: String,
+    message: String,
+    buttonTitles: [String] = []
+  ) -> NSApplication.ModalResponse {
     let alert = NSAlert()
     alert.messageText = title
     alert.informativeText = message

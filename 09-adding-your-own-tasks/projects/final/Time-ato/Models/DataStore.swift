@@ -41,8 +41,7 @@ struct DataStore {
         for: .documentDirectory,
         in: .userDomainMask,
         appropriateFor: nil,
-        create: true
-      )
+        create: true)
       let dataURL = docsFolder
         .appendingPathComponent("Timeato_Tasks.json")
       return dataURL
