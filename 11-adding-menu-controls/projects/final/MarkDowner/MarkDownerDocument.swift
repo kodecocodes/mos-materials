@@ -66,7 +66,9 @@ struct MarkDownerDocument: FileDocument {
   }
 
   // swiftlint:disable force_unwrapping
-  func fileWrapper(configuration: WriteConfiguration) throws -> FileWrapper {
+  func fileWrapper(
+    configuration: WriteConfiguration
+  ) throws -> FileWrapper {
     let data = text.data(using: .utf8)!
     return .init(regularFileWithContents: data)
   }
