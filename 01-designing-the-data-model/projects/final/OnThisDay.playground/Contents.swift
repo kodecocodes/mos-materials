@@ -115,8 +115,7 @@ func getDataForDay(month: Int, day: Int) async throws -> Day {
 Task {
   do {
     let day = try await getDataForDay(
-      month: monthNum, day: dayNum
-    )
+      month: monthNum, day: dayNum)
     appState.days[day.displayDate] = day
     testData()
   } catch {
@@ -171,8 +170,7 @@ struct Event: Decodable, Identifiable {
          let address = link["1"],
          let url = URL(string: address) {
         processedLinks.append(
-          EventLink(id: UUID(), title: title, url: url)
-        )
+          EventLink(id: UUID(), title: title, url: url))
       }
     }
     links = processedLinks
