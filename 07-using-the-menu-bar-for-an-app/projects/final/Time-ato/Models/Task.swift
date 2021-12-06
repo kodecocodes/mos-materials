@@ -86,20 +86,17 @@ extension Task {
       id: UUID(),
       title: "Communications",
       status: .complete,
-      startTime: Date(timeIntervalSinceNow: -600)
-    ),
+      startTime: Date(timeIntervalSinceNow: -600)),
     Task(
       id: UUID(),
       title: "Status Meeting",
       status: .complete,
-      startTime: Date(timeIntervalSinceNow: -300)
-    ),
+      startTime: Date(timeIntervalSinceNow: -300)),
     Task(
       id: UUID(),
       title: "Project ABC - Ticket 42a",
       status: .inProgress,
-      startTime: Date(timeIntervalSinceNow: -60)
-    ),
+      startTime: Date(timeIntervalSinceNow: -60)),
     Task(id: UUID(), title: "Project ABC - Ticket 42b"),
     Task(id: UUID(), title: "Project ABC - Ticket 42c"),
     Task(id: UUID(), title: "Testing"),
