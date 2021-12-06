@@ -52,8 +52,7 @@ struct SidebarView: View {
               .badge(
                 showTotals
                 ? appState.countFor(eventType: type, date: selectedDate)
-                : 0
-              )
+                : 0)
           }
         }
 
