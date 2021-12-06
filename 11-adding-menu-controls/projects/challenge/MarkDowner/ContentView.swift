@@ -52,8 +52,7 @@ struct ContentView: View {
             .frame(
               maxWidth: .infinity,
               maxHeight: .infinity,
-              alignment: .topLeading
-            )
+              alignment: .topLeading)
             .padding()
             .textSelection(.enabled)
         }
@@ -65,13 +64,11 @@ struct ContentView: View {
       maxWidth: .infinity,
       minHeight: 300,
       idealHeight: 400,
-      maxHeight: .infinity
-    )
+      maxHeight: .infinity)
     .font(.system(size: editorFontSize))
     .keyWindow(
       MarkDownerDocument.self,
-      $document
-    )
+      $document)
     .toolbar {
       ToolbarItem {
         Picker("", selection: $previewState) {

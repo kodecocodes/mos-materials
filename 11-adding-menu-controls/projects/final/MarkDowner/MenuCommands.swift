@@ -77,8 +77,7 @@ struct MenuCommands: Commands {
         destination:
           WebView(
             html: nil,
-            address: "https://bit.ly/3x55SNC"
-          )
+            address: "https://bit.ly/3x55SNC")
           .frame(minWidth: 600, minHeight: 600)
       ) {
         Text("Markdown Help")
@@ -127,8 +126,7 @@ struct MenuCommands: Commands {
         try? document.html.write(
           to: url,
           atomically: true,
-          encoding: .utf8
-        )
+          encoding: .utf8)
       }
     }
   }
