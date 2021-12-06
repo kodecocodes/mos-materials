@@ -47,8 +47,7 @@ struct ContentView: View {
       maxWidth: .infinity,
       minHeight: 400,
       idealHeight: 800,
-      maxHeight: .infinity
-    )
+      maxHeight: .infinity)
     .navigationTitle(windowTitle)
   }
 
