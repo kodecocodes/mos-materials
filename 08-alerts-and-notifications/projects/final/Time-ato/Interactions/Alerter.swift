@@ -61,8 +61,7 @@ struct Alerter {
     let response = openAlert(
       title: "Break Over",
       message: message,
-      buttonTitles: buttonTitles
-    )
+      buttonTitles: buttonTitles)
     return response
   }
 
