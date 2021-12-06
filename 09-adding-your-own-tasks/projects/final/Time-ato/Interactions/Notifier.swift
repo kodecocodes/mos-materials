@@ -70,8 +70,7 @@ class Notifier: NSObject {
     sendNotification(
       title: notificationTitle,
       message: message,
-      category: "ACTIONS_CATEGORY"
-    )
+      category: "ACTIONS_CATEGORY")
   }
 
   func sendNotification(
@@ -94,8 +93,7 @@ class Notifier: NSObject {
     let request = UNNotificationRequest(
       identifier: UUID().uuidString,
       content: content,
-      trigger: nil
-    )
+      trigger: nil)
 
     UNUserNotificationCenter.current().add(request)
   }
@@ -118,14 +116,12 @@ extension Notifier: UNUserNotificationCenterDelegate {
   func defineActionCategory() {
     let startNextAction = UNNotificationAction(
       identifier: "START_NEXT_ACTION",
-      title: "Start Next Task"
-    )
+      title: "Start Next Task")
 
     let category = UNNotificationCategory(
       identifier: "ACTIONS_CATEGORY",
       actions: [startNextAction],
-      intentIdentifiers: []
-    )
+      intentIdentifiers: [])
 
     let notificationCenter = UNUserNotificationCenter.current()
     notificationCenter.delegate = self

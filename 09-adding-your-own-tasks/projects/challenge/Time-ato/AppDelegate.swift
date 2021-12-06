@@ -45,8 +45,7 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   func applicationDidFinishLaunching(_ aNotification: Notification) {
     statusItem = NSStatusBar.system.statusItem(
-      withLength: NSStatusItem.variableLength
-    )
+      withLength: NSStatusItem.variableLength)
 
     statusItem?.menu = statusMenu
 
@@ -54,13 +53,11 @@ class AppDelegate: NSObject, NSApplicationDelegate {
     statusItem?.button?.imagePosition = .imageLeading
     statusItem?.button?.image = NSImage(
       systemSymbolName: "timer",
-      accessibilityDescription: "Time-ato"
-    )
+      accessibilityDescription: "Time-ato")
 
     statusItem?.button?.font = NSFont.monospacedDigitSystemFont(
       ofSize: NSFont.systemFontSize,
-      weight: .regular
-    )
+      weight: .regular)
 
     menuManager = MenuManager(statusMenu: statusMenu)
     statusMenu.delegate = menuManager
@@ -89,8 +86,8 @@ class AppDelegate: NSObject, NSApplicationDelegate {
 
   @IBAction func showEditTasksWindow(_ sender: Any) {
     let hostingController = NSHostingController(
-      rootView: EditTasksView()
-    )
+      rootView: EditTasksView())
+
     let window = NSWindow(contentViewController: hostingController)
     window.title = "Edit Tasks"
 

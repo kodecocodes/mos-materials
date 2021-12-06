@@ -40,8 +40,7 @@ extension TaskManager {
       if let startTime = task.startTime {
         let remainingTime = differenceToHourMinFormat(
           start: startTime,
-          duration: TaskTimes.taskTime
-        )
+          duration: TaskTimes.taskTime)
         return ("\(task.title) - \(remainingTime)", task.status.iconName)
       } else {
         return ("Time-ato", "timer")
@@ -49,14 +48,12 @@ extension TaskManager {
     case .takingShortBreak(let startTime):
       let remainingTime = differenceToHourMinFormat(
         start: startTime,
-        duration: TaskTimes.shortBreakTime
-      )
+        duration: TaskTimes.shortBreakTime)
       return ("Short Break - \(remainingTime)", "cup.and.saucer")
     case .takingLongBreak(let startTime):
       let remainingTime = differenceToHourMinFormat(
         start: startTime,
-        duration: TaskTimes.longBreakTime
-      )
+        duration: TaskTimes.longBreakTime)
       return ("Long Break - \(remainingTime)", "figure.walk")
     case .waiting:
       return ("Time-ato", "timer")

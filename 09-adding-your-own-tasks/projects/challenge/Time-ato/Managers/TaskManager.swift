@@ -71,8 +71,7 @@ class TaskManager {
         every: 1,
         tolerance: 0.5,
         on: .current,
-        in: .common
-      )
+        in: .common)
       .autoconnect()
       .sink { _ in
         self.checkTimings()
@@ -122,8 +121,7 @@ class TaskManager {
       if let breakDuration = timerState.breakDuration {
         checkForBreakFinish(
           startTime: startTime,
-          duration: breakDuration
-        )
+          duration: breakDuration)
       }
     default:
       break
@@ -134,8 +132,7 @@ class TaskManager {
       appDelegate.updateMenu(
         title: title,
         icon: icon,
-        taskIsRunning: taskIsRunning
-      )
+        taskIsRunning: taskIsRunning)
     }
   }
 
@@ -147,8 +144,7 @@ class TaskManager {
       } else {
         interaction.taskComplete(
           title: activeTask.title,
-          index: activeTaskIndex
-        )
+          index: activeTaskIndex)
       }
       stopRunningTask(at: activeTaskIndex)
     }

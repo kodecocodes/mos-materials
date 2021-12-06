@@ -140,8 +140,7 @@ struct EditButtonsView: View {
 
     NotificationCenter.default.post(
       name: .dataRefreshNeeded,
-      object: nil
-    )
+      object: nil)
   }
 
   func markAllTasksIncomplete() {
