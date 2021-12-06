@@ -73,8 +73,7 @@ struct ContentView: View {
     appState.dataFor(
       eventType: eventType,
       date: selectedDate,
-      searchText: searchText
-    )
+      searchText: searchText)
   }
 
   // Challenge 2
