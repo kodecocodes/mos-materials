@@ -47,16 +47,27 @@ func runCommand(
 
   do {
     try process.run()
-    process.waitUntilExit()
 
-    if
-      let data = try outFile.readToEnd(),
-      let returnValue = String(data: data, encoding: .utf8) {
-      return returnValue
-        .trimmingCharacters(in: .whitespacesAndNewlines)
+    var returnValue = ""
+    while process.isRunning {
+      let newString = getAvailableData(from: outFile)
+      returnValue += newString
     }
+    let newString = getAvailableData(from: outFile)
+    returnValue += newString
+
+    return returnValue
+      .trimmingCharacters(in: .whitespacesAndNewlines)
   } catch {
     print(error)
+  }
+  return ""
+}
+
+func getAvailableData(from fileHandle: FileHandle) -> String {
+  let newData = fileHandle.availableData
+  if let string = String(data: newData, encoding: .utf8) {
+    return string
   }
   return ""
 }
