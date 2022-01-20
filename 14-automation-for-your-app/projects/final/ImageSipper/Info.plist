@@ -4,7 +4,7 @@
 <dict>
 	<key>INIntentsSupported</key>
 	<array>
-		<string>ChangeDpiIntent</string>
+		<string>PrepareForWebIntent</string>
 	</array>
 	<key>NSServices</key>
 	<array>
@@ -15,7 +15,9 @@
 				<string>Open in ImageSipper</string>
 			</dict>
 			<key>NSMessage</key>
-			<string>openFileFromService</string>
+			<string>openFromService</string>
+			<key>NSPortName</key>
+			<string>ImageSipper</string>
 			<key>NSRequiredContext</key>
 			<dict>
 				<key>NSTextContent</key>
@@ -34,9 +36,7 @@
 	</array>
 	<key>NSUserActivityTypes</key>
 	<array>
-		<string>ChangeDpiIntent</string>
-		<string>ChangeResolutionIntent</string>
-		<string>ResizeIntent</string>
+		<string>PrepareForWebIntent</string>
 	</array>
 </dict>
 </plist>

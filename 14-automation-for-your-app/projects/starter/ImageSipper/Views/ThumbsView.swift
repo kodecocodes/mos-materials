@@ -32,81 +32,106 @@
 
 import SwiftUI
 
-struct ImageEditView: View {
-  @EnvironmentObject var sipsRunner: SipsRunner
-
-  @State private var imageURL: URL?
-  @State private var image: NSImage?
-  @State private var picture: Picture?
+struct ThumbsView: View {
+  @State private var folderURL: URL?
+  @State private var imageURLs: [URL] = []
   @Binding var selectedTab: TabSelection
-
-  let serviceReceivedImageNotification = NotificationCenter.default
-    .publisher(for: .serviceReceivedImage)
-    .receive(on: RunLoop.main)
+  @State private var dragOver = false
 
   var body: some View {
     VStack {
       HStack {
         Button {
-          selectImageFile()
+          selectImagesFolder()
         } label: {
-          Text("Select Image File")
+          Text("Select Folder of Images")
         }
 
-        ScrollingPathView(url: $imageURL)
+        ScrollingPathView(url: $folderURL)
       }
       .padding()
 
-      CustomImageView(imageURL: $imageURL)
+      ScrollView {
+        LazyVStack {
+          ForEach(imageURLs, id: \.self) { imageURL in
+            HStack {
+              AsyncImage(url: imageURL) { image in
+                image
+                  .resizable()
+                  .aspectRatio(contentMode: .fit)
+              } placeholder: {
+                ProgressView()
+              }
+              .frame(width: 100, height: 100)
+              .padding(.leading)
+
+              Text(imageURL.lastPathComponent)
+              Spacer()
+            }
+          }
+        }
+      }
+      .background(Color.gray.opacity(0.1))
+      .cornerRadius(5)
+      .padding(.horizontal)
+      .padding(.bottom, 12)
 
       Spacer()
 
-      ImageEditControls(imageURL: $imageURL, picture: $picture)
-        .disabled(picture == nil)
+      ThumbControls(imageURLs: imageURLs)
+        .disabled(imageURLs.isEmpty)
     }
-    .onChange(of: imageURL) { _ in
-      Task {
-        await getImageData()
+    .onChange(of: folderURL) { _ in
+      if let folderURL = folderURL {
+        imageURLs = FileManager.default.imageFiles(in: folderURL)
+      } else {
+        imageURLs = []
       }
     }
-    .onReceive(serviceReceivedImageNotification) { notification in
-      if let url = notification.object as? URL {
-        selectedTab = .editImage
-        imageURL = url
+    .onDrop(
+      of: ["public.file-url"],
+      isTargeted: $dragOver
+    ) { providers in
+      if let provider = providers.first {
+        provider.loadDataRepresentation(
+          forTypeIdentifier: "public.file-url") { data, _ in
+            loadURL(from: data)
+        }
       }
+      return true
     }
   }
 
-  func selectImageFile() {
+  func selectImagesFolder() {
     let openPanel = NSOpenPanel()
-    openPanel.message = "Select an image file:"
+    openPanel.message = "Select a folder of images:"
 
-    openPanel.canChooseDirectories = false
+    openPanel.canChooseDirectories = true
+    openPanel.canChooseFiles = false
     openPanel.allowsMultipleSelection = false
-    openPanel.allowedContentTypes = [.image]
 
     openPanel.begin { response in
       if response == .OK {
-        imageURL = openPanel.url
+        folderURL = openPanel.url
       }
     }
   }
 
-  func getImageData() async {
+  func loadURL(from data: Data?) {
     guard
-      let imageURL = imageURL,
-      FileManager.default.isImageFile(url: imageURL) else {
+      let data = data,
+      let filePath = String(data: data, encoding: .ascii),
+      let url = URL(string: filePath) else {
         return
       }
-
-    let imageData = await sipsRunner.getImageData(for: imageURL)
-    picture = Picture(url: imageURL, sipsData: imageData)
+    if FileManager.default.isFolder(url: url) {
+      folderURL = url
+    }
   }
 }
 
-struct ResizeView_Previews: PreviewProvider {
+struct ThumbsView_Previews: PreviewProvider {
   static var previews: some View {
-    ImageEditView(selectedTab: .constant(.editImage))
-      .environmentObject(SipsRunner())
+    ThumbsView(selectedTab: .constant(.makeThumbs))
   }
 }

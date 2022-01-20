@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 ///
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -35,10 +35,9 @@ import Intents
 
 @main
 struct ImageSipperApp: App {
-  @NSApplicationDelegateAdaptor(AppDelegate.self) var appDel
-
   @StateObject var sipsRunner = SipsRunner()
-  @StateObject var serviceProvider = ServiceProvider()
+  var serviceProvider = ServiceProvider()
+  @NSApplicationDelegateAdaptor(AppDelegate.self) var appDel
 
   var body: some Scene {
     WindowGroup {
@@ -51,17 +50,21 @@ struct ImageSipperApp: App {
   }
 }
 
-// Service to open image or folder from Services menu
+// To refresh Services menu during testing:
+//
+//  /System/Library/CoreServices/pbs -flush
+//  /System/Library/CoreServices/pbs -update
 
-class ServiceProvider: ObservableObject {
-  @objc func openFileFromService(
+class ServiceProvider {
+  @objc func openFromService(
     _ pboard: NSPasteboard,
     userData: String,
     error: NSErrorPointer
   ) {
     let fileType = NSPasteboard.PasteboardType("public.file-url")
     guard
-      let filePath = pboard.pasteboardItems?.first?.string(forType: fileType),
+      let filePath = pboard.pasteboardItems?.first?
+        .string(forType: fileType),
       let url = URL(string: filePath) else {
         return
       }
@@ -73,7 +76,7 @@ class ServiceProvider: ObservableObject {
       NotificationCenter.default.post(
         name: .serviceReceivedFolder,
         object: url)
-    } else if fileManager.fileIsImage(url: url) {
+    } else if fileManager.isImageFile(url: url) {
       NotificationCenter.default.post(
         name: .serviceReceivedImage,
         object: url)
@@ -82,49 +85,45 @@ class ServiceProvider: ObservableObject {
 }
 
 extension Notification.Name {
-  static let serviceReceivedImage = Notification.Name("serviceReceivedImage")
-  static let serviceReceivedFolder = Notification.Name("serviceReceivedFolder")
+  static let serviceReceivedImage =
+  Notification.Name("serviceReceivedImage")
+  static let serviceReceivedFolder =
+  Notification.Name("serviceReceivedFolder")
 }
 
-// To refresh Services menu during testing:
+// If Intent doesn't appear, delete derived data
 //
-//  /System/Library/CoreServices/pbs -flush
-//  /System/Library/CoreServices/pbs -update
+// rm -rf ~/Library/Developer/Xcode/DerivedData
 
+class PrepareForWebIntentHandler: NSObject, PrepareForWebIntentHandling {
+  func handle(intent: PrepareForWebIntent) async -> PrepareForWebIntentResponse {
+    guard let fileUrl = intent.url?.fileURL else {
+      return PrepareForWebIntentResponse(
+        code: .continueInApp,
+        userActivity: nil)
+    }
 
-// Shortcuts intent to change image resolution
+    await SipsRunner().prepareForWeb(fileUrl)
+
+    return PrepareForWebIntentResponse(code: .success, userActivity: nil)
+  }
+
+  func resolveUrl(for intent: PrepareForWebIntent) async -> INFileResolutionResult {
+    guard let url = intent.url else {
+      return .confirmationRequired(with: nil)
+    }
+    return .success(with: url)
+  }
+}
 
 class AppDelegate: NSObject, NSApplicationDelegate {
-  func application(_ application: NSApplication, handlerFor intent: INIntent) -> Any? {
-    if intent is ChangeDpiIntent {
-      return IntentHandler()
+  func application(
+    _ application: NSApplication,
+    handlerFor intent: INIntent
+  ) -> Any? {
+    if intent is PrepareForWebIntent {
+      return PrepareForWebIntentHandler()
     }
     return nil
-  }
-}
-
-class IntentHandler: NSObject, ChangeDpiIntentHandling {
-  func handle(intent: ChangeDpiIntent) async -> ChangeDpiIntentResponse {
-    guard let fileUrl = intent.url?.fileURL else {
-      return ChangeDpiIntentResponse(code: .continueInApp, userActivity: nil)
-    }
-
-    await SipsRunner().changeResolution(for: fileUrl, to: "72")
-    return ChangeDpiIntentResponse(code: .success, userActivity: nil)
-  }
-
-  func resolveUrl(for intent: ChangeDpiIntent) async -> ChangeDpiUrlResolutionResult {
-    guard
-      let url = intent.url,
-      let fileUrl = url.fileURL else {
-        return .confirmationRequired(with: nil)
-      }
-
-    let fileManager = FileManager.default
-    if !fileManager.fileCanChangeResolution(url: fileUrl) {
-      return .unsupported()
-    }
-
-    return .success(with: url)
   }
 }

@@ -1,4 +1,4 @@
-/// Copyright (c) 2021 Razeware LLC
+/// Copyright (c) 2022 Razeware LLC
 /// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
@@ -33,23 +33,24 @@
 import SwiftUI
 
 class SipsRunner: ObservableObject {
-  @ObservedObject var commandRunner = CommandRunner()
-  var sipsCommandPath: String?
+  var commandRunner = CommandRunner()
 
+  var sipsCommandPath: String?
   func checkSipsCommandPath() async -> String? {
     if sipsCommandPath == nil {
-      sipsCommandPath = await commandRunner.getCommandPath(command: "sips")
+      sipsCommandPath = await commandRunner.pathTo(command: "sips")
     }
     return sipsCommandPath
   }
 
-  func getImageData(for imageUrl: URL) async -> String {
+  func getImageData(for imageURL: URL) async -> String {
     guard let sipsCommandPath = await checkSipsCommandPath() else {
       return ""
     }
 
-    let args = ["--getProperty", "all", "\(imageUrl.path)"]
-    let imageData = await commandRunner.runCommand(sipsCommandPath, with: args)
+    let args = ["--getProperty", "all", imageURL.path]
+    let imageData = await commandRunner
+      .runCommand(sipsCommandPath, with: args)
     return imageData
   }
 
@@ -57,84 +58,58 @@ class SipsRunner: ObservableObject {
     picture: Picture,
     newWidth: String,
     newHeight: String,
-    newDpi: String,
     newFormat: PicFormat
   ) async -> URL? {
     guard let sipsCommandPath = await checkSipsCommandPath() else {
       return nil
     }
 
-    var picUrl = picture.url
-
     let fileManager = FileManager.default
-    let suffix = "-> \(newWidth) x \(newHeight) @ \(newDpi) dpi"
-    var newUrl = fileManager.addSuffix(of: suffix, to: picture.url)
-    newUrl = fileManager.changeFileExtension(of: newUrl, to: newFormat.rawValue)
-
-    // For JPGs, changing DPI only works if size is changed too
-    // So if the size is the same, save the file out twice,
-    // the first time with a slightly different size
-
-    if newDpi != "\(picture.dpiWidth)"
-      && picture.format == "jpeg"
-      && newFormat.rawValue == "jpeg"
-      && newWidth == "\(picture.pixelWidth)"
-      && newHeight == "\(picture.pixelHeight)" {
-      if
-        let widthInt = Int(newWidth),
-        let heightInt = Int(newHeight) {
-        let args = [
-          "--resampleHeightWidth", "\(heightInt + 1)", "\(widthInt + 1)",
-          "\(picUrl.path)",
-          "--out", "\(newUrl.path)"
-        ]
-
-        _ = await commandRunner.runCommand(sipsCommandPath, with: args)
-        picUrl = newUrl
-      }
-    }
+    let suffix = "-> \(newWidth) x \(newHeight)"
+    var newURL = fileManager.addSuffix(of: suffix, to: picture.url)
+    newURL = fileManager.changeFileExtension(
+      of: newURL,
+      to: newFormat.rawValue)
 
     let args = [
-      "--resampleHeightWidth", "\(newHeight)", "\(newWidth)",
-      "--setProperty", "dpiWidth", "\(newDpi)",
-      "--setProperty", "dpiHeight", "\(newDpi)",
-      "--setProperty", "format", "\(newFormat.rawValue)",
-      "\(picUrl.path)",
-      "--out", "\(newUrl.path)"
+      "--resampleHeightWidth", newHeight, newWidth,
+      "--setProperty", "format", newFormat.rawValue,
+      picture.url.path,
+      "--out", newURL.path
     ]
 
     _ = await commandRunner.runCommand(sipsCommandPath, with: args)
-
-    return newUrl
+    return newURL
   }
 
-  func createThumbs(in folder: URL, from imageUrls: [URL], maxDimension: String) async {
+  func createThumbs(
+    in folder: URL,
+    from imageURLs: [URL],
+    maxDimension: String
+  ) async {
     guard let sipsCommandPath = await checkSipsCommandPath() else {
       return
     }
 
-    for imageUrl in imageUrls {
+    for imageURL in imageURLs {
       let args = [
-        "--setProperty", "dpiWidth", "72",
-        "--setProperty", "dpiHeight", "72",
-        "--resampleHeightWidthMax", "\(maxDimension)",
-        "\(imageUrl.path)",
-        "--out", "\(folder.path)"
+        "--resampleHeightWidthMax", maxDimension,
+        imageURL.path,
+        "--out", folder.path
       ]
 
       _ = await commandRunner.runCommand(sipsCommandPath, with: args)
     }
   }
 
-  func changeResolution(for url: URL, to dpi: String) async {
+  func prepareForWeb(_ url: URL) async {
     guard let sipsCommandPath = await checkSipsCommandPath() else {
       return
     }
 
     let args = [
-      "--setProperty", "dpiWidth", "\(dpi)",
-      "--setProperty", "dpiHeight", "\(dpi)",
-      "\(url.path)"
+      "--resampleHeightWidthMax", "800",
+      url.path
     ]
 
     _ = await commandRunner.runCommand(sipsCommandPath, with: args)

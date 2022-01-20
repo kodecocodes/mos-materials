@@ -32,81 +32,36 @@
 
 import SwiftUI
 
-struct ImageEditView: View {
-  @EnvironmentObject var sipsRunner: SipsRunner
-
-  @State private var imageURL: URL?
-  @State private var image: NSImage?
-  @State private var picture: Picture?
-  @Binding var selectedTab: TabSelection
-
-  let serviceReceivedImageNotification = NotificationCenter.default
-    .publisher(for: .serviceReceivedImage)
-    .receive(on: RunLoop.main)
+struct TerminalView: View {
+  @ObservedObject var commandRunner: CommandRunner
 
   var body: some View {
     VStack {
-      HStack {
-        Button {
-          selectImageFile()
-        } label: {
-          Text("Select Image File")
-        }
+      Text("Terminal")
+        .font(.headline)
 
-        ScrollingPathView(url: $imageURL)
+      ScrollView {
+        Text(commandRunner.output)
+          .textSelection(.enabled)
+          .font(.system(size: 12, weight: .regular, design: .monospaced))
+          .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
+          .padding()
       }
-      .padding()
+      .foregroundColor(Color("TerminalText"))
+      .background(Color("TerminalBg"))
+      .border(Color.gray.opacity(0.3))
 
-      CustomImageView(imageURL: $imageURL)
-
-      Spacer()
-
-      ImageEditControls(imageURL: $imageURL, picture: $picture)
-        .disabled(picture == nil)
-    }
-    .onChange(of: imageURL) { _ in
-      Task {
-        await getImageData()
+      Button("Clear Terminal") {
+        commandRunner.clearOutput()
       }
     }
-    .onReceive(serviceReceivedImageNotification) { notification in
-      if let url = notification.object as? URL {
-        selectedTab = .editImage
-        imageURL = url
-      }
-    }
-  }
-
-  func selectImageFile() {
-    let openPanel = NSOpenPanel()
-    openPanel.message = "Select an image file:"
-
-    openPanel.canChooseDirectories = false
-    openPanel.allowsMultipleSelection = false
-    openPanel.allowedContentTypes = [.image]
-
-    openPanel.begin { response in
-      if response == .OK {
-        imageURL = openPanel.url
-      }
-    }
-  }
-
-  func getImageData() async {
-    guard
-      let imageURL = imageURL,
-      FileManager.default.isImageFile(url: imageURL) else {
-        return
-      }
-
-    let imageData = await sipsRunner.getImageData(for: imageURL)
-    picture = Picture(url: imageURL, sipsData: imageData)
+    .frame(minWidth: 300)
+    .padding()
   }
 }
 
-struct ResizeView_Previews: PreviewProvider {
+struct TerminalView_Previews: PreviewProvider {
   static var previews: some View {
-    ImageEditView(selectedTab: .constant(.editImage))
-      .environmentObject(SipsRunner())
+    TerminalView(commandRunner: CommandRunner())
   }
 }

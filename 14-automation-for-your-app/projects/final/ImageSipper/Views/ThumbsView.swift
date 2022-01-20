@@ -1,15 +1,15 @@
-/// Copyright (c) 2021 Razeware LLC
-///
+/// Copyright (c) 2022 Razeware LLC
+/// 
 /// Permission is hereby granted, free of charge, to any person obtaining a copy
 /// of this software and associated documentation files (the "Software"), to deal
 /// in the Software without restriction, including without limitation the rights
 /// to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
 /// copies of the Software, and to permit persons to whom the Software is
 /// furnished to do so, subject to the following conditions:
-///
+/// 
 /// The above copyright notice and this permission notice shall be included in
 /// all copies or substantial portions of the Software.
-///
+/// 
 /// Notwithstanding the foregoing, you may not use, copy, modify, merge, publish,
 /// distribute, sublicense, create a derivative work, and/or sell copies of the
 /// Software in any work that is designed, intended, or marketed for pedagogical or
@@ -17,7 +17,7 @@
 /// or information technology.  Permission for such use, copying, modification,
 /// merger, publication, distribution, sublicensing, creation of derivative works,
 /// or sale is expressly withheld.
-///
+/// 
 /// This project and source code may use libraries or frameworks that are
 /// released under various Open-Source licenses. Use of those libraries and
 /// frameworks are governed by their own individual licenses.
@@ -33,11 +33,10 @@
 import SwiftUI
 
 struct ThumbsView: View {
-  @EnvironmentObject var sipsRunner: SipsRunner
-  @State private var dragOver = false
-  @State private var folderUrl: URL?
-  @State private var imageUrls: [URL] = []
+  @State private var folderURL: URL?
+  @State private var imageURLs: [URL] = []
   @Binding var selectedTab: TabSelection
+  @State private var dragOver = false
 
   let serviceReceivedFolderNotification = NotificationCenter.default
     .publisher(for: .serviceReceivedFolder)
@@ -52,42 +51,55 @@ struct ThumbsView: View {
           Text("Select Folder of Images")
         }
 
-        ScrollingPathView(imageUrl: $folderUrl)
+        ScrollingPathView(url: $folderURL)
       }
       .padding()
 
       ScrollView {
         LazyVStack {
-          ForEach(imageUrls, id: \.self) { imageUrl in
+          ForEach(imageURLs, id: \.self) { imageURL in
             HStack {
-              Image(nsImage: NSImage(contentsOf: imageUrl) ?? NSImage())
-                .resizable()
-                .aspectRatio(contentMode: .fit)
-                .frame(width: 100, height: 100)
-              Text(imageUrl.lastPathComponent)
+              AsyncImage(url: imageURL) { image in
+                image
+                  .resizable()
+                  .aspectRatio(contentMode: .fit)
+              } placeholder: {
+                ProgressView()
+              }
+              .frame(width: 100, height: 100)
+              .padding(.leading)
+
+              Text(imageURL.lastPathComponent)
               Spacer()
             }
           }
         }
       }
       .background(Color.gray.opacity(0.1))
-      .padding()
+      .cornerRadius(5)
+      .padding(.horizontal)
+      .padding(.bottom, 12)
 
-      ThumbControls(imageUrls: imageUrls)
-        .disabled(imageUrls.isEmpty)
+      Spacer()
+
+      ThumbControls(imageURLs: imageURLs)
+        .disabled(imageURLs.isEmpty)
     }
-    .onChange(of: folderUrl) { _ in
-      if let folderUrl = folderUrl {
-        imageUrls = FileManager.default.imageFiles(in: folderUrl)
+    .onChange(of: folderURL) { _ in
+      if let folderURL = folderURL {
+        imageURLs = FileManager.default.imageFiles(in: folderURL)
       } else {
-        imageUrls = []
+        imageURLs = []
       }
     }
-    .onDrop(of: ["public.file-url"], isTargeted: $dragOver) { providers in
-      for provider in providers {
+    .onDrop(
+      of: ["public.file-url"],
+      isTargeted: $dragOver
+    ) { providers in
+      if let provider = providers.first {
         provider.loadDataRepresentation(
           forTypeIdentifier: "public.file-url") { data, _ in
-            loadUrl(from: data)
+            loadURL(from: data)
         }
       }
       return true
@@ -95,26 +107,27 @@ struct ThumbsView: View {
     .onReceive(serviceReceivedFolderNotification) { notification in
       if let url = notification.object as? URL {
         selectedTab = .makeThumbs
-        folderUrl = url
+        folderURL = url
       }
     }
   }
 
   func selectImagesFolder() {
     let openPanel = NSOpenPanel()
-    openPanel.title = "Select a folder of images"
+    openPanel.message = "Select a folder of images:"
+
     openPanel.canChooseDirectories = true
     openPanel.canChooseFiles = false
     openPanel.allowsMultipleSelection = false
 
     openPanel.begin { response in
       if response == .OK {
-        folderUrl = openPanel.url
+        folderURL = openPanel.url
       }
     }
   }
 
-  func loadUrl(from data: Data?) {
+  func loadURL(from data: Data?) {
     guard
       let data = data,
       let filePath = String(data: data, encoding: .ascii),
@@ -122,7 +135,7 @@ struct ThumbsView: View {
         return
       }
     if FileManager.default.isFolder(url: url) {
-      folderUrl = url
+      folderURL = url
     }
   }
 }
@@ -130,6 +143,5 @@ struct ThumbsView: View {
 struct ThumbsView_Previews: PreviewProvider {
   static var previews: some View {
     ThumbsView(selectedTab: .constant(.makeThumbs))
-      .environmentObject(SipsRunner())
   }
 }

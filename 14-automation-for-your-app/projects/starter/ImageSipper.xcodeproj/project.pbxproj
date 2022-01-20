@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		260BEFEC2797CF730059FBDC /* Intents.intentdefinition in Sources */ = {isa = PBXBuildFile; fileRef = 260BEFEB2797CF730059FBDC /* Intents.intentdefinition */; };
 		26BF75F8278A67DC00B932ED /* SipsRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BF75F7278A67DC00B932ED /* SipsRunner.swift */; };
 		26E3829C2786A7EC00317CEA /* ImageSipperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E3829B2786A7EC00317CEA /* ImageSipperApp.swift */; };
 		26E3829E2786A7EC00317CEA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E3829D2786A7EC00317CEA /* ContentView.swift */; };
@@ -28,8 +27,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		260BEFEA2797CA8E0059FBDC /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
-		260BEFEB2797CF730059FBDC /* Intents.intentdefinition */ = {isa = PBXFileReference; lastKnownFileType = file.intentdefinition; path = Intents.intentdefinition; sourceTree = "<group>"; };
 		26BF75F7278A67DC00B932ED /* SipsRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SipsRunner.swift; sourceTree = "<group>"; };
 		26E382982786A7EC00317CEA /* ImageSipper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageSipper.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		26E3829B2786A7EC00317CEA /* ImageSipperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSipperApp.swift; sourceTree = "<group>"; };
@@ -81,7 +78,6 @@
 		26E3829A2786A7EC00317CEA /* ImageSipper */ = {
 			isa = PBXGroup;
 			children = (
-				260BEFEA2797CA8E0059FBDC /* Info.plist */,
 				26E3829B2786A7EC00317CEA /* ImageSipperApp.swift */,
 				26E382AB2786A87200317CEA /* Views */,
 				26E382B22786A9CF00317CEA /* Components */,
@@ -90,7 +86,6 @@
 				26E3829F2786A7ED00317CEA /* Assets.xcassets */,
 				26E382A42786A7ED00317CEA /* ImageSipper.entitlements */,
 				26E382A12786A7ED00317CEA /* Preview Content */,
-				260BEFEB2797CF730059FBDC /* Intents.intentdefinition */,
 			);
 			path = ImageSipper;
 			sourceTree = "<group>";
@@ -244,7 +239,6 @@
 				26E382B42786A9F200317CEA /* CustomImageView.swift in Sources */,
 				26E382C02786ABE000317CEA /* Picture.swift in Sources */,
 				26E382B82786AA8500317CEA /* ThumbControls.swift in Sources */,
-				260BEFEC2797CF730059FBDC /* Intents.intentdefinition in Sources */,
 				26E3829E2786A7EC00317CEA /* ContentView.swift in Sources */,
 				26E382C62786AC3200317CEA /* FileManager+Ext.swift in Sources */,
 				26E382BA2786AAEA00317CEA /* PathView.swift in Sources */,
@@ -387,7 +381,6 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ImageSipper/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ImageSipper/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -413,7 +406,6 @@
 				DEVELOPMENT_ASSET_PATHS = "\"ImageSipper/Preview Content\"";
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = ImageSipper/Info.plist;
 				INFOPLIST_KEY_NSHumanReadableCopyright = "";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

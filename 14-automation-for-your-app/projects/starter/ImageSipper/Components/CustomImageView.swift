@@ -32,81 +32,60 @@
 
 import SwiftUI
 
-struct ImageEditView: View {
-  @EnvironmentObject var sipsRunner: SipsRunner
-
-  @State private var imageURL: URL?
+struct CustomImageView: View {
+  @Binding var imageURL: URL?
   @State private var image: NSImage?
-  @State private var picture: Picture?
-  @Binding var selectedTab: TabSelection
-
-  let serviceReceivedImageNotification = NotificationCenter.default
-    .publisher(for: .serviceReceivedImage)
-    .receive(on: RunLoop.main)
+  @State private var dragOver = false
 
   var body: some View {
-    VStack {
-      HStack {
-        Button {
-          selectImageFile()
-        } label: {
-          Text("Select Image File")
-        }
-
-        ScrollingPathView(url: $imageURL)
-      }
+    Image(nsImage: image ?? NSImage())
+      .resizable()
+      .aspectRatio(contentMode: .fit)
       .padding()
-
-      CustomImageView(imageURL: $imageURL)
-
-      Spacer()
-
-      ImageEditControls(imageURL: $imageURL, picture: $picture)
-        .disabled(picture == nil)
-    }
-    .onChange(of: imageURL) { _ in
-      Task {
-        await getImageData()
+      .frame(maxWidth: .infinity)
+      .background(Color.gray.opacity(0.1))
+      .cornerRadius(5)
+      .padding(.horizontal)
+      .padding(.bottom, 12)
+      .onChange(of: imageURL) { _ in
+        loadImage()
       }
-    }
-    .onReceive(serviceReceivedImageNotification) { notification in
-      if let url = notification.object as? URL {
-        selectedTab = .editImage
-        imageURL = url
+      .onDrop(
+        of: ["public.file-url"],
+        isTargeted: $dragOver
+      ) { providers in
+        if let provider = providers.first {
+          provider.loadDataRepresentation(
+            forTypeIdentifier: "public.file-url") { data, _ in
+              loadURL(from: data)
+          }
+        }
+        return true
       }
+  }
+
+  func loadImage() {
+    if let imageURL = imageURL {
+      image = NSImage(contentsOf: imageURL)
+    } else {
+      image = nil
     }
   }
 
-  func selectImageFile() {
-    let openPanel = NSOpenPanel()
-    openPanel.message = "Select an image file:"
-
-    openPanel.canChooseDirectories = false
-    openPanel.allowsMultipleSelection = false
-    openPanel.allowedContentTypes = [.image]
-
-    openPanel.begin { response in
-      if response == .OK {
-        imageURL = openPanel.url
-      }
-    }
-  }
-
-  func getImageData() async {
+  func loadURL(from data: Data?) {
     guard
-      let imageURL = imageURL,
-      FileManager.default.isImageFile(url: imageURL) else {
+      let data = data,
+      let filePath = String(data: data, encoding: .utf8),
+      let url = URL(string: filePath) else {
         return
       }
 
-    let imageData = await sipsRunner.getImageData(for: imageURL)
-    picture = Picture(url: imageURL, sipsData: imageData)
+    imageURL = url
   }
 }
 
-struct ResizeView_Previews: PreviewProvider {
+struct CustomImageView_Previews: PreviewProvider {
   static var previews: some View {
-    ImageEditView(selectedTab: .constant(.editImage))
-      .environmentObject(SipsRunner())
+    CustomImageView(imageURL: .constant(nil))
   }
 }

@@ -32,81 +32,73 @@
 
 import SwiftUI
 
-struct ImageEditView: View {
-  @EnvironmentObject var sipsRunner: SipsRunner
+class SipsRunner: ObservableObject {
+  var commandRunner = CommandRunner()
 
-  @State private var imageURL: URL?
-  @State private var image: NSImage?
-  @State private var picture: Picture?
-  @Binding var selectedTab: TabSelection
-
-  let serviceReceivedImageNotification = NotificationCenter.default
-    .publisher(for: .serviceReceivedImage)
-    .receive(on: RunLoop.main)
-
-  var body: some View {
-    VStack {
-      HStack {
-        Button {
-          selectImageFile()
-        } label: {
-          Text("Select Image File")
-        }
-
-        ScrollingPathView(url: $imageURL)
-      }
-      .padding()
-
-      CustomImageView(imageURL: $imageURL)
-
-      Spacer()
-
-      ImageEditControls(imageURL: $imageURL, picture: $picture)
-        .disabled(picture == nil)
+  var sipsCommandPath: String?
+  func checkSipsCommandPath() async -> String? {
+    if sipsCommandPath == nil {
+      sipsCommandPath = await commandRunner.pathTo(command: "sips")
     }
-    .onChange(of: imageURL) { _ in
-      Task {
-        await getImageData()
-      }
-    }
-    .onReceive(serviceReceivedImageNotification) { notification in
-      if let url = notification.object as? URL {
-        selectedTab = .editImage
-        imageURL = url
-      }
-    }
+    return sipsCommandPath
   }
 
-  func selectImageFile() {
-    let openPanel = NSOpenPanel()
-    openPanel.message = "Select an image file:"
-
-    openPanel.canChooseDirectories = false
-    openPanel.allowsMultipleSelection = false
-    openPanel.allowedContentTypes = [.image]
-
-    openPanel.begin { response in
-      if response == .OK {
-        imageURL = openPanel.url
-      }
+  func getImageData(for imageURL: URL) async -> String {
+    guard let sipsCommandPath = await checkSipsCommandPath() else {
+      return ""
     }
+
+    let args = ["--getProperty", "all", imageURL.path]
+    let imageData = await commandRunner
+      .runCommand(sipsCommandPath, with: args)
+    return imageData
   }
 
-  func getImageData() async {
-    guard
-      let imageURL = imageURL,
-      FileManager.default.isImageFile(url: imageURL) else {
-        return
-      }
+  func resizeImage(
+    picture: Picture,
+    newWidth: String,
+    newHeight: String,
+    newFormat: PicFormat
+  ) async -> URL? {
+    guard let sipsCommandPath = await checkSipsCommandPath() else {
+      return nil
+    }
 
-    let imageData = await sipsRunner.getImageData(for: imageURL)
-    picture = Picture(url: imageURL, sipsData: imageData)
+    let fileManager = FileManager.default
+    let suffix = "-> \(newWidth) x \(newHeight)"
+    var newURL = fileManager.addSuffix(of: suffix, to: picture.url)
+    newURL = fileManager.changeFileExtension(
+      of: newURL,
+      to: newFormat.rawValue)
+
+    let args = [
+      "--resampleHeightWidth", newHeight, newWidth,
+      "--setProperty", "format", newFormat.rawValue,
+      picture.url.path,
+      "--out", newURL.path
+    ]
+
+    _ = await commandRunner.runCommand(sipsCommandPath, with: args)
+    return newURL
   }
-}
 
-struct ResizeView_Previews: PreviewProvider {
-  static var previews: some View {
-    ImageEditView(selectedTab: .constant(.editImage))
-      .environmentObject(SipsRunner())
+  func createThumbs(
+    in folder: URL,
+    from imageURLs: [URL],
+    maxDimension: String
+  ) async {
+    guard let sipsCommandPath = await checkSipsCommandPath() else {
+      return
+    }
+
+    for imageURL in imageURLs {
+      let args = [
+        "--resampleHeightWidthMax", maxDimension,
+        imageURL.path,
+        "--out", folder.path
+      ]
+
+      _ = await commandRunner.runCommand(sipsCommandPath, with: args)
+    }
   }
 }
