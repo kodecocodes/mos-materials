@@ -43,7 +43,7 @@ struct Menus: Commands {
 
     CommandGroup(before: .help) {
       Button("APIzen.Date web site") {
-        showApiWebSite()
+        showAPIWebSite()
       }
       .keyboardShortcut("/", modifiers: .command)
     }
@@ -86,7 +86,7 @@ struct Menus: Commands {
     }
   }
 
-  func showApiWebSite() {
+  func showAPIWebSite() {
     let address = "https://apizen.date"
     guard let url = URL(string: address) else {
       fatalError("Invalid address")

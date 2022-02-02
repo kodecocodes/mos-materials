@@ -30,7 +30,6 @@
 /// OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN
 /// THE SOFTWARE.
 
-import Foundation
 import SwiftUI
 
 struct Menus: Commands {
@@ -43,7 +42,7 @@ struct Menus: Commands {
 
     CommandGroup(before: .help) {
       Button("APIzen.Date web site") {
-        showApiWebSite()
+        showAPIWebSite()
       }
       .keyboardShortcut("/", modifiers: .command)
     }
@@ -85,7 +84,7 @@ struct Menus: Commands {
     }
   }
 
-  func showApiWebSite() {
+  func showAPIWebSite() {
     let address = "https://apizen.date"
     guard let url = URL(string: address) else {
       fatalError("Invalid address")
