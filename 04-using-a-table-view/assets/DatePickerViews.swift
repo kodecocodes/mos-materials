@@ -34,24 +34,25 @@ import SwiftUI
 
 struct DatePickerViews: View {
   @State private var selectedDate = Date()
-    var body: some View {
-      VStack {
-        HStack(alignment: .top) {
-          DatePicker("Field", selection: $selectedDate, displayedComponents: [.date])
-            .datePickerStyle(.field)
 
-          DatePicker("Graphical", selection: $selectedDate, displayedComponents: [.date])
-            .datePickerStyle(.graphical)
-        }
-        .padding()
+  var body: some View {
+    VStack {
+      HStack(alignment: .top) {
+        DatePicker("Field", selection: $selectedDate, displayedComponents: [.date])
+          .datePickerStyle(.field)
 
-        Text(selectedDate.description)
+        DatePicker("Graphical", selection: $selectedDate, displayedComponents: [.date])
+          .datePickerStyle(.graphical)
       }
+      .padding()
+
+      Text(selectedDate.description)
     }
+  }
 }
 
 struct DatePickerViews_Previews: PreviewProvider {
-    static var previews: some View {
-        DatePickerViews()
-    }
+  static var previews: some View {
+    DatePickerViews()
+  }
 }
