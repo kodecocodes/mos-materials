@@ -61,7 +61,7 @@ class ServiceProvider {
     userData: String,
     error: NSErrorPointer
   ) {
-    let fileType = NSPasteboard.PasteboardType("public.file-url")
+    let fileType = NSPasteboard.PasteboardType.fileURL
     guard
       let filePath = pboard.pasteboardItems?.first?
         .string(forType: fileType),

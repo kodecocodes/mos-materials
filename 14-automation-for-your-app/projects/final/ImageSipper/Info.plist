@@ -25,12 +25,12 @@
 			</dict>
 			<key>NSSendFileTypes</key>
 			<array>
-				<string>public.directory</string>
+				<string>public.folder</string>
 				<string>public.image</string>
 			</array>
 			<key>NSSendTypes</key>
 			<array>
-				<string>public.plain-text</string>
+				<string>string</string>
 			</array>
 		</dict>
 	</array>
