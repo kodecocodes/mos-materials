@@ -53,7 +53,7 @@ struct DayPicker: View {
         .pickerStyle(.menu)
 
         Picker("", selection: $day) {
-          ForEach(1 ..< maxDays + 1, id: \.self) {
+          ForEach(1 ... maxDays, id: \.self) {
             Text("\($0)")
           }
         }
