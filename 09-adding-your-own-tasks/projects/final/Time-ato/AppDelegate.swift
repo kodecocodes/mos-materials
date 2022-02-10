@@ -37,9 +37,9 @@ import LaunchAtLogin
 @main
 class AppDelegate: NSObject, NSApplicationDelegate {
   var statusItem: NSStatusItem?
-  @IBOutlet weak var statusMenu: NSMenu!
   var menuManager: MenuManager?
 
+  @IBOutlet weak var statusMenu: NSMenu!
   @IBOutlet weak var startStopMenuItem: NSMenuItem!
   @IBOutlet weak var launchOnLoginMenuItem: NSMenuItem!
 
