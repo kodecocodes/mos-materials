@@ -43,8 +43,8 @@ struct EditTasksView: View {
           TextField(
             "",
             text: $task.title,
-            prompt: Text("Task title")
-          ).textFieldStyle(.squareBorder)
+            prompt: Text("Task title"))
+            .textFieldStyle(.squareBorder)
 
           Image(systemName: task.status == .complete
             ? "checkmark.square"

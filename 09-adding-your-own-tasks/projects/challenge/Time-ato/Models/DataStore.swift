@@ -70,9 +70,10 @@ struct DataStore {
   func save(tasks: [Task]) {
     guard
       let url = dataFileURL(),
-      let data = try? JSONEncoder().encode(tasks) else {
-        return
-      }
+      let data = try? JSONEncoder().encode(tasks)
+    else {
+      return
+    }
     do {
       try data.write(to: url)
     } catch {
