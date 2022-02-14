@@ -47,9 +47,8 @@ struct MenuCommands: Commands {
           Text(style.rawValue)
             .foregroundColor(style == styleSheet ? .accentColor : .primary)
         }
-        // swiftlint:disable force_unwrapping
+        // swiftlint:disable:next force_unwrapping
         .keyboardShortcut(KeyEquivalent(style.rawValue.first!))
-        // swiftlint:enable force_unwrapping
       }
 
       Divider()
