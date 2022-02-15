@@ -111,7 +111,7 @@ struct ImageEditControls: View {
   }
 }
 
-struct ResizeControls_Previews: PreviewProvider {
+struct ImageEditControls_Previews: PreviewProvider {
   static var previews: some View {
     ImageEditControls(imageURL: .constant(nil), picture: .constant(nil))
       .environmentObject(SipsRunner())
