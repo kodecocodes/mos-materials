@@ -104,7 +104,7 @@ struct ImageEditView: View {
   }
 }
 
-struct ResizeView_Previews: PreviewProvider {
+struct ImageEditView_Previews: PreviewProvider {
   static var previews: some View {
     ImageEditView(selectedTab: .constant(.editImage))
       .environmentObject(SipsRunner())
