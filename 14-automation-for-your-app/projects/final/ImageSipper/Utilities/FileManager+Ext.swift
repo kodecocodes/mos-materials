@@ -38,7 +38,7 @@ extension FileManager {
   func isFolder(url: URL) -> Bool {
     var isDir: ObjCBool = false
 
-    if self.fileExists(atPath: url.path, isDirectory: &isDir) {
+    if fileExists(atPath: url.path, isDirectory: &isDir) {
       return isDir.boolValue
     }
 

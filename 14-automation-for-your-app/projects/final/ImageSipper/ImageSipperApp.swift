@@ -97,13 +97,13 @@ extension Notification.Name {
 
 class PrepareForWebIntentHandler: NSObject, PrepareForWebIntentHandling {
   func handle(intent: PrepareForWebIntent) async -> PrepareForWebIntentResponse {
-    guard let fileUrl = intent.url?.fileURL else {
+    guard let fileURL = intent.url?.fileURL else {
       return PrepareForWebIntentResponse(
         code: .continueInApp,
         userActivity: nil)
     }
 
-    await SipsRunner().prepareForWeb(fileUrl)
+    await SipsRunner().prepareForWeb(fileURL)
 
     return PrepareForWebIntentResponse(code: .success, userActivity: nil)
   }
