@@ -1,0 +1,446 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 55;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		26BF75F8278A67DC00B932ED /* SipsRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26BF75F7278A67DC00B932ED /* SipsRunner.swift */; };
+		26E3829C2786A7EC00317CEA /* ImageSipperApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E3829B2786A7EC00317CEA /* ImageSipperApp.swift */; };
+		26E3829E2786A7EC00317CEA /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E3829D2786A7EC00317CEA /* ContentView.swift */; };
+		26E382A02786A7ED00317CEA /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26E3829F2786A7ED00317CEA /* Assets.xcassets */; };
+		26E382A32786A7ED00317CEA /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 26E382A22786A7ED00317CEA /* Preview Assets.xcassets */; };
+		26E382AD2786A8B900317CEA /* ImageEditView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E382AC2786A8B900317CEA /* ImageEditView.swift */; };
+		26E382AF2786A92700317CEA /* ThumbsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E382AE2786A92700317CEA /* ThumbsView.swift */; };
+		26E382B12786A97C00317CEA /* TerminalView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E382B02786A97C00317CEA /* TerminalView.swift */; };
+		26E382B42786A9F200317CEA /* CustomImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E382B32786A9F200317CEA /* CustomImageView.swift */; };
+		26E382B62786AA3400317CEA /* ImageEditControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E382B52786AA3400317CEA /* ImageEditControls.swift */; };
+		26E382B82786AA8500317CEA /* ThumbControls.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E382B72786AA8500317CEA /* ThumbControls.swift */; };
+		26E382BA2786AAEA00317CEA /* PathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E382B92786AAEA00317CEA /* PathView.swift */; };
+		26E382BC2786AB8800317CEA /* ScrollingPathView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E382BB2786AB8800317CEA /* ScrollingPathView.swift */; };
+		26E382C02786ABE000317CEA /* Picture.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E382BF2786ABE000317CEA /* Picture.swift */; };
+		26E382C22786ABF600317CEA /* PicFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E382C12786ABF600317CEA /* PicFormat.swift */; };
+		26E382C42786AC1000317CEA /* CommandRunner.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E382C32786AC1000317CEA /* CommandRunner.swift */; };
+		26E382C62786AC3200317CEA /* FileManager+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 26E382C52786AC3200317CEA /* FileManager+Ext.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		26BF75F7278A67DC00B932ED /* SipsRunner.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SipsRunner.swift; sourceTree = "<group>"; };
+		26E382982786A7EC00317CEA /* ImageSipper.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ImageSipper.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		26E3829B2786A7EC00317CEA /* ImageSipperApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageSipperApp.swift; sourceTree = "<group>"; };
+		26E3829D2786A7EC00317CEA /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		26E3829F2786A7ED00317CEA /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		26E382A22786A7ED00317CEA /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		26E382A42786A7ED00317CEA /* ImageSipper.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ImageSipper.entitlements; sourceTree = "<group>"; };
+		26E382AC2786A8B900317CEA /* ImageEditView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEditView.swift; sourceTree = "<group>"; };
+		26E382AE2786A92700317CEA /* ThumbsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbsView.swift; sourceTree = "<group>"; };
+		26E382B02786A97C00317CEA /* TerminalView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TerminalView.swift; sourceTree = "<group>"; };
+		26E382B32786A9F200317CEA /* CustomImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CustomImageView.swift; sourceTree = "<group>"; };
+		26E382B52786AA3400317CEA /* ImageEditControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageEditControls.swift; sourceTree = "<group>"; };
+		26E382B72786AA8500317CEA /* ThumbControls.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThumbControls.swift; sourceTree = "<group>"; };
+		26E382B92786AAEA00317CEA /* PathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PathView.swift; sourceTree = "<group>"; };
+		26E382BB2786AB8800317CEA /* ScrollingPathView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollingPathView.swift; sourceTree = "<group>"; };
+		26E382BF2786ABE000317CEA /* Picture.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Picture.swift; sourceTree = "<group>"; };
+		26E382C12786ABF600317CEA /* PicFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PicFormat.swift; sourceTree = "<group>"; };
+		26E382C32786AC1000317CEA /* CommandRunner.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CommandRunner.swift; sourceTree = "<group>"; };
+		26E382C52786AC3200317CEA /* FileManager+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "FileManager+Ext.swift"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		26E382952786A7EC00317CEA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		26E3828F2786A7EC00317CEA = {
+			isa = PBXGroup;
+			children = (
+				26E3829A2786A7EC00317CEA /* ImageSipper */,
+				26E382992786A7EC00317CEA /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		26E382992786A7EC00317CEA /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				26E382982786A7EC00317CEA /* ImageSipper.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		26E3829A2786A7EC00317CEA /* ImageSipper */ = {
+			isa = PBXGroup;
+			children = (
+				26E3829B2786A7EC00317CEA /* ImageSipperApp.swift */,
+				26E382AB2786A87200317CEA /* Views */,
+				26E382B22786A9CF00317CEA /* Components */,
+				26E382BD2786ABA900317CEA /* Models */,
+				26E382BE2786ABB300317CEA /* Utilities */,
+				26E3829F2786A7ED00317CEA /* Assets.xcassets */,
+				26E382A42786A7ED00317CEA /* ImageSipper.entitlements */,
+				26E382A12786A7ED00317CEA /* Preview Content */,
+			);
+			path = ImageSipper;
+			sourceTree = "<group>";
+		};
+		26E382A12786A7ED00317CEA /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				26E382A22786A7ED00317CEA /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		26E382AB2786A87200317CEA /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				26E3829D2786A7EC00317CEA /* ContentView.swift */,
+				26E382AC2786A8B900317CEA /* ImageEditView.swift */,
+				26E382AE2786A92700317CEA /* ThumbsView.swift */,
+				26E382B02786A97C00317CEA /* TerminalView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		26E382B22786A9CF00317CEA /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				26E382B32786A9F200317CEA /* CustomImageView.swift */,
+				26E382B52786AA3400317CEA /* ImageEditControls.swift */,
+				26E382B72786AA8500317CEA /* ThumbControls.swift */,
+				26E382B92786AAEA00317CEA /* PathView.swift */,
+				26E382BB2786AB8800317CEA /* ScrollingPathView.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		26E382BD2786ABA900317CEA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				26E382BF2786ABE000317CEA /* Picture.swift */,
+				26E382C12786ABF600317CEA /* PicFormat.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		26E382BE2786ABB300317CEA /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				26E382C32786AC1000317CEA /* CommandRunner.swift */,
+				26E382C52786AC3200317CEA /* FileManager+Ext.swift */,
+				26BF75F7278A67DC00B932ED /* SipsRunner.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		26E382972786A7EC00317CEA /* ImageSipper */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 26E382A72786A7ED00317CEA /* Build configuration list for PBXNativeTarget "ImageSipper" */;
+			buildPhases = (
+				26E382AA2786A81E00317CEA /* SwiftLint */,
+				26E382942786A7EC00317CEA /* Sources */,
+				26E382952786A7EC00317CEA /* Frameworks */,
+				26E382962786A7EC00317CEA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = ImageSipper;
+			productName = ImageSipper;
+			productReference = 26E382982786A7EC00317CEA /* ImageSipper.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		26E382902786A7EC00317CEA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1320;
+				LastUpgradeCheck = 1320;
+				ORGANIZATIONNAME = "Ray Wenderlich";
+				TargetAttributes = {
+					26E382972786A7EC00317CEA = {
+						CreatedOnToolsVersion = 13.2.1;
+					};
+				};
+			};
+			buildConfigurationList = 26E382932786A7EC00317CEA /* Build configuration list for PBXProject "ImageSipper" */;
+			compatibilityVersion = "Xcode 13.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 26E3828F2786A7EC00317CEA;
+			productRefGroup = 26E382992786A7EC00317CEA /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				26E382972786A7EC00317CEA /* ImageSipper */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		26E382962786A7EC00317CEA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				26E382A32786A7ED00317CEA /* Preview Assets.xcassets in Resources */,
+				26E382A02786A7ED00317CEA /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		26E382AA2786A81E00317CEA /* SwiftLint */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = SwiftLint;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "PATH=/opt/homebrew/bin:$PATH\nif [ -f ~/com.raywenderlich.swiftlint.yml ]; then\n  if which swiftlint >/dev/null; then\n    swiftlint --no-cache --config ~/com.raywenderlich.swiftlint.yml\n  fi\nfi\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		26E382942786A7EC00317CEA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				26E382B12786A97C00317CEA /* TerminalView.swift in Sources */,
+				26E382C42786AC1000317CEA /* CommandRunner.swift in Sources */,
+				26E382BC2786AB8800317CEA /* ScrollingPathView.swift in Sources */,
+				26E382B42786A9F200317CEA /* CustomImageView.swift in Sources */,
+				26E382C02786ABE000317CEA /* Picture.swift in Sources */,
+				26E382B82786AA8500317CEA /* ThumbControls.swift in Sources */,
+				26E3829E2786A7EC00317CEA /* ContentView.swift in Sources */,
+				26E382C62786AC3200317CEA /* FileManager+Ext.swift in Sources */,
+				26E382BA2786AAEA00317CEA /* PathView.swift in Sources */,
+				26E382C22786ABF600317CEA /* PicFormat.swift in Sources */,
+				26E382AF2786A92700317CEA /* ThumbsView.swift in Sources */,
+				26E3829C2786A7EC00317CEA /* ImageSipperApp.swift in Sources */,
+				26BF75F8278A67DC00B932ED /* SipsRunner.swift in Sources */,
+				26E382B62786AA3400317CEA /* ImageEditControls.swift in Sources */,
+				26E382AD2786A8B900317CEA /* ImageEditView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		26E382A52786A7ED00317CEA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		26E382A62786A7ED00317CEA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++17";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 12.1;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = macosx;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+			};
+			name = Release;
+		};
+		26E382A82786A7ED00317CEA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ImageSipper/ImageSipper.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ImageSipper/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.ImageSipper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Debug;
+		};
+		26E382A92786A7ED00317CEA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = ImageSipper/ImageSipper.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				COMBINE_HIDPI_IMAGES = YES;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"ImageSipper/Preview Content\"";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSHumanReadableCopyright = "";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/../Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.raywenderlich.ImageSipper;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		26E382932786A7EC00317CEA /* Build configuration list for PBXProject "ImageSipper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				26E382A52786A7ED00317CEA /* Debug */,
+				26E382A62786A7ED00317CEA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		26E382A72786A7ED00317CEA /* Build configuration list for PBXNativeTarget "ImageSipper" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				26E382A82786A7ED00317CEA /* Debug */,
+				26E382A92786A7ED00317CEA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 26E382902786A7EC00317CEA /* Project object */;
+}
