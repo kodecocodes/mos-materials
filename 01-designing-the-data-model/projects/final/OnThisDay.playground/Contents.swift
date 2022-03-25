@@ -69,7 +69,7 @@ enum FetchError: Error {
 }
 
 func getDataForDay(month: Int, day: Int) async throws -> Day {
-  let address = "https://apizen.date/api/\(month)/\(day)"
+  let address = "https://today.zenquotes.io/api/\(month)/\(day)"
   guard let url = URL(string: address) else {
     throw FetchError.badURL
   }
