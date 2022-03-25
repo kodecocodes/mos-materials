@@ -42,7 +42,7 @@ struct Menus: Commands {
     ToolbarCommands()
 
     CommandGroup(before: .help) {
-      Button("APIzen.Date web site") {
+      Button("ZenQuotes.io web site") {
         showAPIWebSite()
       }
       .keyboardShortcut("/", modifiers: .command)
@@ -87,7 +87,7 @@ struct Menus: Commands {
   }
 
   func showAPIWebSite() {
-    let address = "https://apizen.date"
+    let address = "https://today.zenquotes.io"
     guard let url = URL(string: address) else {
       fatalError("Invalid address")
     }

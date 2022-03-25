@@ -33,16 +33,16 @@
 import Foundation
 
 enum FetchError: Error {
-  case badUrl
+  case badURL
   case badResponse
-  case badJson
+  case badJSON
 }
 
 enum Networker {
   static func getDataForDay(month: Int, day: Int) async throws -> Day {
-    let address = "https://apizen.date/api/\(month)/\(day)"
+    let address = "https://today.zenquotes.io/api/\(month)/\(day)"
     guard let url = URL(string: address) else {
-      throw FetchError.badUrl
+      throw FetchError.badURL
     }
     let request = URLRequest(url: url)
 
@@ -56,7 +56,7 @@ enum Networker {
         print(debugString)
       }
 
-      throw FetchError.badJson
+      throw FetchError.badJSON
     }
     return day
   }
