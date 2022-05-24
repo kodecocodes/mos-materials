@@ -47,10 +47,8 @@ class TaskView: NSView {
     imageView.imageScaling = .scaleProportionallyUpOrDown
 
     let titleFrame = NSRect(x: 40, y: 20, width: 220, height: 16)
-    titleLabel = NSTextField(frame: titleFrame)
 
     let infoProgressFrame = NSRect(x: 40, y: 4, width: 220, height: 14)
-    infoLabel = NSTextField(frame: infoProgressFrame)
 
     progressBar = NSProgressIndicator(frame: infoProgressFrame)
     progressBar.minValue = 0
